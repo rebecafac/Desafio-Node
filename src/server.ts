@@ -1,7 +1,7 @@
 const http = require('http');
 
 const hostname = '127.0.0.1';
-const port = 3000;
+const port = 3500;
 
 const server = http.createServer();
 
@@ -17,7 +17,7 @@ export class ProvaTesteComponent {
 		this.criarUmNovoLivro("Harry Potter e a Camara secreta", "Fantasia");
 		this.criarUmNovoLivro("WildCards", "Esportes");
 		this.criarUmNovoLivro("O Trono do Sol", "Fantasia")
-		console.log(this.listarLivrosFantasia())
+		console.log(this.listarLivrosFantasia())		
 	}
 
 	initLivros(){
@@ -30,7 +30,7 @@ export class ProvaTesteComponent {
 	}
 
 	criarUmNovoLivro(nome: string, genero: string){
-		if (this.buscarLivro(nome, genero) === 0){
+		if (this.buscarLivro(nome, genero) === -1){
 			const novoLivro: Livro = {
 				id: this.listLivros.length,
 				nome: nome,
@@ -42,16 +42,23 @@ export class ProvaTesteComponent {
 			/**
 			 * Monte a mensagem de erro avisando que já existe um Livro cadastrado sobre o nome e genero passados
 			 */
+			console.log("Já existe um livro com nome '" + nome + "' de genero '" + genero + "' cadastrado!")
+
 		}
 	}
 
 	buscarLivro(livro: string, genero: string): number{
 		let indiceLivro: number = -1
 		for (let index = 0; index < this.listLivros.length; index++) {
-			const livro = this.listLivros[index]
+			// const livro = this.listLivros[index]
 			/**
              * Implemente a validação onde retorne o Indice do Livro caso encontre um com mesmo nome e genero
              */
+			indiceLivro = this.listLivros[index].nome === livro  && this.listLivros[index].genero === genero ?  index : -1
+
+			if(indiceLivro > -1 ){
+				break
+			}
 		}
 		return indiceLivro
 	}
@@ -60,6 +67,14 @@ export class ProvaTesteComponent {
 		/**
 		 * Retorne uma String contendo o nome de todos os Livros que são de fantasia.
 		 */
+		const soFantasia: Array<string> = []
+
+		this.listLivros.forEach(item =>{
+			if(item.genero === 'Fantasia'){
+				soFantasia.push(' ' + item.nome) // Espacinho no inicio para facilitar a leitura rs
+			}
+		})
+		return soFantasia.toString()
 	}
 }
 

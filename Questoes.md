@@ -25,6 +25,12 @@
 
     4. Utilize este exercicio para explicar os erros que encontrou e o que fez para ajusta-los. Caso ache interessante, explique tambem a implementação do que foi solicitado nos comentários.
 
+        Erros encontrados
+            1 - A função buscarLivro() possuia um parametro e uma variável constante com o mesmo nome, desta forma não era possível utilizar os dois para a validação dentro do laço. Removi a variável const, pois não vi a necessidade de utiliza-la.
+
+            2 - A função criarUmNovoLivro() contem uma validação onde busca se o livro ja foi cadastrado. Esta validação deveria retornar o índice do livro, caso ja estivesse cadastrado. Com sabemos, arrays no JS iniciam em 0 então para esta validação não poderiamos usar o 0, se tivessemos um livro cadastrado que estivesse na primera posição do array this.listLivros[0].
+
+
 ## Sugestões
 
 A cada etapa do que codificar sugerimos que crie um `commit` e detalhe o que foi feito no `commit`. Isso nos ajuda a ver o progresso do que fez.
